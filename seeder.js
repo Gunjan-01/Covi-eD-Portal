@@ -20,8 +20,8 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 // read json file
-const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf - 8'));
-const courses = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf - 8'));
+const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`));
+const courses = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`));
 
 // import into db
 const ImportData = async () => {

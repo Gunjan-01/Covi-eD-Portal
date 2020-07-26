@@ -1,6 +1,7 @@
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
 const Course = require('../models/Course');
+const Bootcamp = require('../models/Bootcamp');
 
 // @desc get courses
 // @routes GET  /api/v1/courses
@@ -15,6 +16,7 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
 
     } else {
         query = Course.find();
+        query = Course.find().populate({path: 'bootcamp', select: 'name description'});
     }
     const courses = await query;
     res.status(200).json({success: true, count: courses.length, data: courses});
