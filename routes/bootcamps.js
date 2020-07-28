@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getbootcamps,
-    createbootcamp,
-    updatebootcamps,
-    deletebootcamp,
-    getbootcamp
+  getbootcamps,
+  createbootcamp,
+  updatebootcamps,
+  deletebootcamp,
+  getbootcamp,
+  bootcampPhotoUpload,
 } = require('../controllers/bootcamps');
 
 // include other resource routers
@@ -16,7 +17,12 @@ router.use('/:bootcampId/courses', courseRouter);
 
 router.route('/').get(getbootcamps).post(createbootcamp);
 
-router.route('/:id').delete(deletebootcamp).get(getbootcamp).put(updatebootcamps);
+router
+  .route('/:id')
+  .delete(deletebootcamp)
+  .get(getbootcamp)
+  .put(updatebootcamps);
 
+router.route('/:id/photo').put(bootcampPhotoUpload);
 
 module.exports = router;
