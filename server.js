@@ -3,8 +3,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const fileupload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
-const bootcamps = require('./routes/bootcamps.js');
 const connectdB = require('./config/dB');
 
 // load env variables
@@ -17,13 +17,16 @@ dotenv.config({ path: './config/config.env' });
 connectdB();
 
 // route files
-
+const bootcamps = require('./routes/bootcamps.js');
 const courses = require('./routes/courses.js');
-
+const auth = require('./routes/auth.js');
 const app = express();
 
 // body parser
 app.use(express.json());
+
+//cookie parser
+app.use(cookieParser());
 
 // dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -42,6 +45,7 @@ require('./models/Course');
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
+app.use('/api/v1/auth', auth);
 
 app.use(errorHandler);
 
