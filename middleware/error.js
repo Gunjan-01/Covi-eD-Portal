@@ -11,9 +11,7 @@ const errorHandler = (err, req, res, next) => {
 
     // mongoose bad id request
     if (err.name == 'CastError') {
-        const message = `bootcamp not found with th id ${
-            err.value
-        }`;
+        const message = `Resource not found`;
         error = new ErrorResponse(message, 404);
     }
     // mongoose duplicate field value  error
